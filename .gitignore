@@ -1,0 +1,9 @@
+*.log
+*.csv
+*.gz
+*.bak
+*.swp
+*~
+.env
+*.key
+*.pem

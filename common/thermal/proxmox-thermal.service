@@ -1,0 +1,6 @@
+[Unit]
+Description=Log Proxmox thermal sensors
+
+[Service]
+Type=oneshot
+ExecStart=/opt/proxmox-thermal/thermal-log.py
