@@ -7,3 +7,7 @@
 .env
 *.key
 *.pem
+
+# Python
+__pycache__/
+*.py[cod]
