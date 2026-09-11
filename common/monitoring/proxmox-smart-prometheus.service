@@ -1,0 +1,6 @@
+[Unit]
+Description=Export NVMe SMART metrics for Prometheus
+
+[Service]
+Type=oneshot
+ExecStart=/opt/proxmox-thermal/export-smart-prometheus.py

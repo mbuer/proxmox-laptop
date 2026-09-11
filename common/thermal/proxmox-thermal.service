@@ -1,6 +1,8 @@
 [Unit]
-Description=Log Proxmox thermal sensors
+Description=Log Proxmox thermal sensors and export Prometheus metrics
 
 [Service]
 Type=oneshot
 ExecStart=/opt/proxmox-thermal/thermal-log.py
+ExecStart=/opt/proxmox-thermal/export-prometheus.py
+ExecStart=/opt/proxmox-thermal/export-power-prometheus.py

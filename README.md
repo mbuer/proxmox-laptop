@@ -15,6 +15,7 @@ First platform:
 - Apple T2 keyboard and trackpad support
 - display and Touch Bar power handling
 - temperature logging
+- Prometheus host monitoring
 - kexec-based closed-lid reboot
 - documented boot and Wake-on-LAN behavior
 
@@ -29,10 +30,28 @@ On the 2019 T2 MacBook Pro:
 - Wake-on-LAN packets reach the Thunderbolt Ethernet adapter, but do not wake the MacBook from suspend or power-off
 - unused ZFS import services caused a two-minute boot delay and were disabled
 
+## Monitoring
+
+The Proxmox host runs `prometheus-node-exporter` for native Linux metrics and exposes additional hardware metrics through its textfile collector.
+
+Custom monitoring currently covers:
+
+- CPU, GPU, PCH, NVMe, and battery temperatures
+- AC power state
+- battery charge, cycle count, and status
+- NVMe SMART health, wear, errors, power statistics, and I/O counters
+
+Thermal and power measurements update once per minute. NVMe SMART data updates every 15 minutes.
+
+The host only exposes metrics. A separate Prometheus server and Grafana OSS instance are intended to provide long-term storage, dashboards, and alerting.
+
+See [`common/monitoring/README.md`](common/monitoring/README.md) for the architecture, metric names, collection intervals, and validation commands.
+
 ## Repository layout
 
 - `common/network` — reusable network configuration
 - `common/thermal` — temperature logging
+- `common/monitoring` — Prometheus host monitoring and custom hardware exporters
 - `platforms/macbook-pro-2019-t2/lid` — closed-lid display handling
 - `platforms/macbook-pro-2019-t2/t2` — Apple T2 support
 - `platforms/macbook-pro-2019-t2/BOOT.md` — boot behavior and fixes
